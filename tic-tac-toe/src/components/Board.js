@@ -1,11 +1,11 @@
 import Square from "./Square";
 
-const renderSquares = (gridSide, currentBoard, handleClickedSquare) => {
+const renderSquares = (gridSize, currentBoard, handleClickedSquare) => {
   const gridSquares = [];
-  for (let row = 0; row < gridSide; row += 1) {
+  for (let row = 0; row < gridSize; row += 1) {
     const rowSquares = [];
-    for (let col = 0; col < gridSide; col += 1) {
-      const index = row * gridSide + col;
+    for (let col = 0; col < gridSize; col += 1) {
+      const index = row * gridSize + col;
       rowSquares.push(
         <Square
           key={index}
@@ -23,8 +23,8 @@ const renderSquares = (gridSide, currentBoard, handleClickedSquare) => {
   return gridSquares;
 };
 
-const Board = ({ gridSide, currentBoard, handleClickedSquare }) => {
-  const squares = renderSquares(gridSide, currentBoard, handleClickedSquare);
+const Board = ({ gridSize, currentBoard, handleClickedSquare }) => {
+  const squares = renderSquares(gridSize, currentBoard, handleClickedSquare);
   return <main>{squares}</main>;
 };
 export default Board;
