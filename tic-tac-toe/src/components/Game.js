@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Board from "./Board";
+import checkWinner from "./WinnerCheck";
 
 const Game = () => {
   const minGridSize = 3;
@@ -10,15 +11,24 @@ const Game = () => {
   );
   const [gridSize, setGridSize] = useState(minGridSize);
   const [currentMove, setCurrentMove] = useState(0);
+  const [status, setStatus] = useState("Game Start");
+  const [winner, setWinner] = useState();
 
   const handleClickedSquare = (index) => {
-    if (currentBoard[index]) {
+    console.log("aaa");
+
+    if (currentBoard[index] || winner) {
       return;
     }
     const newBoard = [...currentBoard];
     newBoard[index] = currentMove % 2 == 0 ? "X" : "O";
     setCurrentBoard(newBoard);
     setCurrentMove(currentMove + 1);
+    setStatus(`Turn of ${newBoard[index] == "O" ? "X" : "O"}`);
+    if (checkWinner(newBoard, index, gridSize)) {
+      setWinner(newBoard[index]);
+      setStatus(`Winner is ${newBoard[index]}`);
+    }
   };
 
   const handleGridSize = (event) => {
@@ -29,6 +39,9 @@ const Game = () => {
     if (newSize >= minGridSize && newSize <= maxGridSize) {
       setGridSize(newSize);
       setCurrentBoard(Array(newSize ** 2).fill(""));
+      setStatus("Game Start");
+      setWinner("");
+      setCurrentMove(0);
     }
     setInputGridSize(newSize);
   };
@@ -45,8 +58,11 @@ const Game = () => {
           onChange={handleGridSize}
         />
       </div>
+      <div className="text-white">
+        <h1>{status}</h1>
+      </div>
       <Board
-        gridSide={gridSize}
+        gridSize={gridSize}
         currentBoard={currentBoard}
         handleClickedSquare={handleClickedSquare}
       />
