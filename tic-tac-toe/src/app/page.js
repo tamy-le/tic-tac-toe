@@ -1,3 +1,5 @@
+"use client";
+import Game from "./../components/Game";
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+  return <Game />;
 }
