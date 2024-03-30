@@ -9,15 +9,18 @@ const Game = () => {
     Array(minGridSize ** 2).fill("")
   );
   const [gridSize, setGridSize] = useState(minGridSize);
-  console.log("game");
+  const [currentMove, setCurrentMove] = useState(0);
+
   const handleClickedSquare = (index) => {
     if (currentBoard[index]) {
       return;
     }
     const newBoard = [...currentBoard];
-    newBoard[index] = "X";
+    newBoard[index] = currentMove % 2 == 0 ? "X" : "O";
     setCurrentBoard(newBoard);
+    setCurrentMove(currentMove + 1);
   };
+
   const handleGridSize = (event) => {
     let newSize = parseInt(event.target.value);
     if (isNaN(newSize)) {
