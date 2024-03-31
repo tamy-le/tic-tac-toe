@@ -78,10 +78,10 @@ const checkRow = (
         indexNeighbor2
       )
     ) {
-      return true;
+      return [indexCurrent, indexNeighbor1, indexNeighbor2];
     }
   }
-  return false;
+  return null;
 };
 const checkCol = (
   currentBoard,
@@ -111,11 +111,11 @@ const checkCol = (
         indexNeighbor2
       )
     ) {
-      return true;
+      return [indexCurrent, indexNeighbor1, indexNeighbor2];
     }
   }
 
-  return false;
+  return null;
 };
 const checkDiagonal = (
   currentBoard,
@@ -146,20 +146,22 @@ const checkDiagonal = (
         indexNeighbor2
       )
     ) {
-      return true;
+      return [indexCurrent, indexNeighbor1, indexNeighbor2];
     }
   }
 
-  return false;
+  return null;
 };
 
+const checkDraw = (currentBoard) => {
+  return !currentBoard.includes("");
+};
 const checkWinner = (currentBoard, currentIndex, gridSize) => {
   const [currentRow, currentCol] = convertIndexToRowCol(currentIndex, gridSize);
-
-  return (
+  let wonSquares =
     checkRow(currentBoard, currentRow, currentCol, currentIndex, gridSize) ||
     checkCol(currentBoard, currentRow, currentCol, currentIndex, gridSize) ||
-    checkDiagonal(currentBoard, currentRow, currentCol, currentIndex, gridSize)
-  );
+    checkDiagonal(currentBoard, currentRow, currentCol, currentIndex, gridSize);
+  return wonSquares;
 };
-export default checkWinner;
+export { checkDraw, checkWinner };

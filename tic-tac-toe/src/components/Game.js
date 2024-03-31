@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Board from "./Board";
-import checkWinner from "./WinnerCheck";
+import { checkWinner, checkDraw } from "./WinnerCheck";
 
 const Game = () => {
   const minGridSize = 3;
@@ -12,6 +12,7 @@ const Game = () => {
   const [status, setStatus] = useState("Game Start");
   const [winner, setWinner] = useState("");
   const [toggle, setToggle] = useState(false);
+  const [winningSquares, setWinningSquares] = useState();
 
   const handleClickedSquare = (index) => {
     if (
@@ -25,11 +26,16 @@ const Game = () => {
     newBoard[index] = currentMove % 2 == 0 ? "X" : "O";
     setHistory([...history, newBoard]);
     setCurrentMove(currentMove + 1);
-    setStatus(`Next player: ${newBoard[index] == "O" ? "X" : "O"}`);
-    if (checkWinner(newBoard, index, gridSize)) {
+    let statusHolder = `Next player: ${newBoard[index] == "O" ? "X" : "O"}`;
+    let wonSquares = checkWinner(newBoard, index, gridSize);
+    if (wonSquares) {
       setWinner(newBoard[index]);
-      setStatus(`Winner is ${newBoard[index]}`);
+      setWinningSquares(wonSquares);
+      statusHolder = `Winner is ${newBoard[index]}`;
+    } else if (checkDraw(newBoard)) {
+      statusHolder = "Draw! You guys suck";
     }
+    setStatus(statusHolder);
   };
 
   const handleGridSize = (event) => {
@@ -43,6 +49,8 @@ const Game = () => {
       setStatus("Game Start");
       setWinner("");
       setCurrentMove(0);
+      setWinningSquares();
+      setToggle(false);
     }
     setInputGridSize(newSize);
   };
@@ -86,12 +94,13 @@ const Game = () => {
           <Board
             gridSize={gridSize}
             currentBoard={history[currentMove]}
+            winningSquares={winningSquares}
             handleClickedSquare={handleClickedSquare}
           />
           <div className="ml-10">
             <button
               type="button"
-              class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
               onClick={() => setToggle(!toggle)}
             >
               Reserve Moves Order
