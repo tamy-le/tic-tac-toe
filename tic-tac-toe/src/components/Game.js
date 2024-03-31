@@ -13,7 +13,11 @@ const Game = () => {
   const [winner, setWinner] = useState();
 
   const handleClickedSquare = (index) => {
-    if (history[currentMove][index] || winner) {
+    if (
+      history[currentMove][index] ||
+      currentMove != history.length - 1 ||
+      winner
+    ) {
       return;
     }
     const newBoard = [...history[currentMove]];
@@ -34,7 +38,7 @@ const Game = () => {
     }
     if (newSize >= minGridSize && newSize <= maxGridSize) {
       setGridSize(newSize);
-      setHistory(Array(newSize ** 2).fill(""));
+      setHistory([Array(newSize ** 2).fill("")]);
       setStatus("Game Start");
       setWinner("");
       setCurrentMove(0);
@@ -42,9 +46,27 @@ const Game = () => {
     setInputGridSize(newSize);
   };
 
+  const jumpToMove = (move) => {
+    setCurrentMove(move);
+  };
+
   const moves = history.map((squares, move) => {
+    console.log(move);
     let description = move > 0 ? `Go to move #${move}` : "Go to game start";
-    return <li>{description}</li>;
+    return (
+      <li key={move}>
+        {currentMove !== move ? (
+          <button
+            onClick={() => jumpToMove(move)}
+            className="m-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 rounded"
+          >
+            {description}
+          </button>
+        ) : (
+          <span>You're at move #{move}</span>
+        )}
+      </li>
+    );
   });
   return (
     <main className="ml-5 flex">
