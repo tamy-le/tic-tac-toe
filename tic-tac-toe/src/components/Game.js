@@ -9,7 +9,7 @@ import {
 const Game = () => {
   const minGridSize = 3;
   const maxGridSize = 10;
-  const [inputGridSize, setInputGridSize] = useState(minGridSize);
+  const [inputGridSize, setInputGridSize] = useState();
   const [history, setHistory] = useState([
     { squares: Array(minGridSize ** 2).fill(""), index: -1 },
   ]);
@@ -45,11 +45,10 @@ const Game = () => {
   };
 
   const handleGridSize = (event) => {
-    let newSize = parseInt(event.target.value);
-    if (isNaN(newSize)) {
-      newSize = minGridSize;
-    }
-    if (newSize >= minGridSize && newSize <= maxGridSize) {
+    let newSize = parseInt(event.target.value, 10);
+    setInputGridSize(newSize);
+
+    if (!isNaN(newSize) && newSize >= minGridSize && newSize <= maxGridSize) {
       setGridSize(newSize);
       setHistory([{ squares: Array(newSize ** 2).fill(""), index: -1 }]);
       setStatus("Game Start");
@@ -58,7 +57,6 @@ const Game = () => {
       setWinningSquares();
       setToggle(false);
     }
-    setInputGridSize(newSize);
   };
 
   const jumpToMove = (move) => {
