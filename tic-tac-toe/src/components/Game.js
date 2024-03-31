@@ -94,7 +94,7 @@ const Game = () => {
     }
   });
   return (
-    <main className="ml-5 flex">
+    <main className="bg-black ml-5 flex">
       <div className="block pb-5 text-white">
         <input
           className="text-black"
