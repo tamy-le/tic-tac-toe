@@ -37,14 +37,12 @@ const convertRowColToIndex = (row, col, gridSize) => {
 };
 
 const convertIndexToRowCol = (index, gridSize) => {
-  console.log("ch");
   const row = Math.floor(index / gridSize);
   const col = index % gridSize;
   return [row, col];
 };
 
 const checkThreeSquareEqual = (board, index1, index2, index3) => {
-  console.log("checkaaa", board[index1], board[index2], board[index3]);
   return (
     board[index1] != "" &&
     board[index1] == board[index2] &&
@@ -83,7 +81,6 @@ const checkRow = (
       return true;
     }
   }
-  console.log("checkrow");
   return false;
 };
 const checkCol = (
@@ -117,7 +114,6 @@ const checkCol = (
       return true;
     }
   }
-  console.log("checkcol");
 
   return false;
 };
@@ -139,8 +135,6 @@ const checkDiagonal = (
       currentCol + diagonalDirection[1][1],
       gridSize
     );
-    console.log(indexNeighbor1, indexNeighbor2);
-    console.log(diagonalDirection);
 
     if (indexNeighbor1 == -1 || indexNeighbor2 == -1) {
       continue;
@@ -155,17 +149,12 @@ const checkDiagonal = (
       return true;
     }
   }
-  console.log("checkdiag");
 
   return false;
 };
 
 const checkWinner = (currentBoard, currentIndex, gridSize) => {
-  console.log("chel", currentIndex);
-  console.log("hah");
-
   const [currentRow, currentCol] = convertIndexToRowCol(currentIndex, gridSize);
-  console.log("haha", currentRow, currentCol);
 
   return (
     checkRow(currentBoard, currentRow, currentCol, currentIndex, gridSize) ||
