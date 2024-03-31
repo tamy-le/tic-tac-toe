@@ -164,4 +164,4 @@ const checkWinner = (currentBoard, currentIndex, gridSize) => {
     checkDiagonal(currentBoard, currentRow, currentCol, currentIndex, gridSize);
   return wonSquares;
 };
-export { checkDraw, checkWinner };
+export { checkDraw, checkWinner, convertIndexToRowCol };

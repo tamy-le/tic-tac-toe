@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Board from "./Board";
-import { checkWinner, checkDraw } from "./WinnerCheck";
+import { checkWinner, checkDraw, convertIndexToRowCol } from "./WinnerCheck";
 
 const Game = () => {
   const minGridSize = 3;
   const maxGridSize = 10;
   const [inputGridSize, setInputGridSize] = useState(minGridSize);
-  const [history, setHistory] = useState([Array(minGridSize ** 2).fill("")]);
+  const [history, setHistory] = useState([
+    { squares: Array(minGridSize ** 2).fill(""), index: -1 },
+  ]);
   const [gridSize, setGridSize] = useState(minGridSize);
   const [currentMove, setCurrentMove] = useState(0);
   const [status, setStatus] = useState("Game Start");
@@ -16,15 +18,15 @@ const Game = () => {
 
   const handleClickedSquare = (index) => {
     if (
-      history[currentMove][index] ||
+      history[currentMove].squares[index] ||
       currentMove != history.length - 1 ||
       winner
     ) {
       return;
     }
-    const newBoard = [...history[currentMove]];
+    const newBoard = [...history[currentMove].squares];
     newBoard[index] = currentMove % 2 == 0 ? "X" : "O";
-    setHistory([...history, newBoard]);
+    setHistory([...history, { squares: newBoard, index: index }]);
     setCurrentMove(currentMove + 1);
     let statusHolder = `Next player: ${newBoard[index] == "O" ? "X" : "O"}`;
     let wonSquares = checkWinner(newBoard, index, gridSize);
@@ -45,7 +47,7 @@ const Game = () => {
     }
     if (newSize >= minGridSize && newSize <= maxGridSize) {
       setGridSize(newSize);
-      setHistory([Array(newSize ** 2).fill("")]);
+      setHistory([{ squares: Array(newSize ** 2).fill(""), index: -1 }]);
       setStatus("Game Start");
       setWinner("");
       setCurrentMove(0);
@@ -60,21 +62,32 @@ const Game = () => {
   };
 
   const moves = history.map((squares, move) => {
-    let description = move > 0 ? `Go to move #${move}` : "Go to game start";
-    return (
-      <li key={move}>
-        {currentMove !== move ? (
+    const desc = move === 0 ? "Go to game start" : `Go to move #${move}`;
+
+    if (move === 0 || currentMove !== move) {
+      return (
+        <li key={move}>
           <button
             onClick={() => jumpToMove(move)}
             className="m-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 rounded"
           >
-            {description}
+            {desc}
           </button>
-        ) : (
-          <span>You're at move #{move}</span>
-        )}
-      </li>
-    );
+        </li>
+      );
+    } else {
+      const [currentRow, currentCol] = convertIndexToRowCol(
+        squares.index,
+        gridSize
+      );
+      return (
+        <li key={move}>
+          <span>
+            You're at move #{move} at row {currentRow} at column {currentCol}
+          </span>
+        </li>
+      );
+    }
   });
   return (
     <main className="ml-5 flex">
@@ -93,7 +106,7 @@ const Game = () => {
         <div className="flex">
           <Board
             gridSize={gridSize}
-            currentBoard={history[currentMove]}
+            currentBoard={history[currentMove].squares}
             winningSquares={winningSquares}
             handleClickedSquare={handleClickedSquare}
           />
