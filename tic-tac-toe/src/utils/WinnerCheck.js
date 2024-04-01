@@ -1,34 +1,7 @@
-const conditionToWinForOrthogonal = {
-  Left: [-1, -2],
-  Between: [-1, 1],
-  Right: [1, 2],
-};
-const conditionToWinForDiagonal = {
-  NorthWest: [
-    [-2, -2],
-    [-1, -1],
-  ],
-  NorthEast: [
-    [-2, 2],
-    [-1, 1],
-  ],
-  SouthWest: [
-    [2, 2],
-    [1, 1],
-  ],
-  SouthEast: [
-    [2, -2],
-    [1, -1],
-  ],
-  NorthWestToSouthEast: [
-    [-1, -1],
-    [1, 1],
-  ],
-  SouthWestToNorthEast: [
-    [1, -1],
-    [-1, 1],
-  ],
-};
+import {
+  conditionToWinForDiagonal,
+  conditionToWinForOrthogonal,
+} from "@/constants/gameConfig";
 
 const convertRowColToIndex = (row, col, gridSize) => {
   return row >= 0 && row < gridSize && col >= 0 && col < gridSize
@@ -156,6 +129,7 @@ const checkDiagonal = (
 const checkDraw = (currentBoard) => {
   return !currentBoard.includes("");
 };
+
 const checkWinner = (currentBoard, currentIndex, gridSize) => {
   const [currentRow, currentCol] = convertIndexToRowCol(currentIndex, gridSize);
   let wonSquares =
@@ -164,4 +138,5 @@ const checkWinner = (currentBoard, currentIndex, gridSize) => {
     checkDiagonal(currentBoard, currentRow, currentCol, currentIndex, gridSize);
   return wonSquares;
 };
+
 export { checkDraw, checkWinner, convertIndexToRowCol };

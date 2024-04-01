@@ -4,11 +4,10 @@ import {
   checkWinner,
   checkDraw,
   convertIndexToRowCol,
-} from "../utils/WinnerCheck";
+} from "@/utils/WinnerCheck";
+import { minGridSize, maxGridSize } from "@/constants/gameConfig";
 
 const Game = () => {
-  const minGridSize = 3;
-  const maxGridSize = 10;
   const [inputGridSize, setInputGridSize] = useState();
   const [history, setHistory] = useState([
     { squares: Array(minGridSize ** 2).fill(""), index: -1 },
