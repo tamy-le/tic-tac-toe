@@ -1,6 +1,7 @@
 "use client";
-import Game from "../components/Game";
+import Game from "components/Game";
+
 const Page = () => {
-  return <Game />;
+	return <Game />;
 };
 export default Page;
