@@ -126,9 +126,7 @@ const checkDiagonal = (
 	return null;
 };
 
-const checkDraw = (currentBoard) => {
-	return !currentBoard.includes("");
-};
+const checkDraw = (currentBoard) => !currentBoard.includes("");
 
 const checkWinner = (currentBoard, currentIndex, gridSize) => {
 	const [currentRow, currentCol] = convertIndexToRowCol(
