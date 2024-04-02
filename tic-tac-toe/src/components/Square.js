@@ -1,11 +1,9 @@
-const Square = ({ value, isWonSquare, handleClicked }) => {
-	const backgroundColor = isWonSquare ? "bg-rose-300" : "bg-white";
-	const textColor = isWonSquare ? "text-red-600" : "text-black";
-	const fontWeight = isWonSquare ? "font-semibold" : "font-light";
-	const className = `square ${backgroundColor} ${fontWeight} ${textColor}`;
+import classNames from "classnames";
 
+const Square = ({ value, isWonSquare, handleClicked }) => {
+	const squareClass = classNames("square", { "is-won-square": isWonSquare });
 	return (
-		<button className={className} onClick={handleClicked}>
+		<button className={squareClass} onClick={handleClicked}>
 			{value}
 		</button>
 	);

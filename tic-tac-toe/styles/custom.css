@@ -15,5 +15,9 @@
 }
 
 .square {
-	@apply float-left box-border size-16 border-4 border-indigo-500/100 text-center;
+	@apply float-left box-border size-16 border-4 border-indigo-500/100 bg-white text-center font-light text-black;
+}
+
+.is-won-square {
+    @apply bg-rose-300 text-red-600 font-semibold
 }
