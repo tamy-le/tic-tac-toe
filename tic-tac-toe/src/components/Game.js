@@ -42,23 +42,24 @@ const Game = () => {
 		}
 		setStatus(statusHolder);
 	};
-
+	const resetGame = (newSize) => {
+		setGridSize(newSize);
+		setHistory([{ squares: Array(newSize ** 2).fill(""), index: -1 }]);
+		setStatus("Game Start");
+		setWinner("");
+		setCurrentMove(0);
+		setWinningSquares();
+		setToggle(false);
+	};
 	const handleGridSize = (event) => {
 		let newSize = parseInt(event.target.value, 10);
-		setInputGridSize(newSize ? newSize : "");
-
+		setInputGridSize(newSize || "");
 		if (
 			!isNaN(newSize) &&
 			newSize >= minGridSize &&
 			newSize <= maxGridSize
 		) {
-			setGridSize(newSize);
-			setHistory([{ squares: Array(newSize ** 2).fill(""), index: -1 }]);
-			setStatus("Game Start");
-			setWinner("");
-			setCurrentMove(0);
-			setWinningSquares();
-			setToggle(false);
+			resetGame(newSize);
 		} else {
 			console.log("Wrong input for grid size");
 		}
