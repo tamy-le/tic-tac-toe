@@ -1,0 +1,23 @@
+.game-container {
+	@apply m-auto flex h-dvh bg-black;
+}
+
+.game-info {
+	@apply block pb-5 text-white;
+}
+
+.move-list-button {
+	@apply m-1 rounded hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700;
+}
+
+.reverse-order-button {
+	@apply rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800;
+}
+
+.square {
+	@apply float-left box-border size-16 border-4 border-indigo-500/100 bg-white text-center font-light text-black;
+}
+
+.is-won-square {
+    @apply bg-rose-300 text-red-600 font-semibold
+}

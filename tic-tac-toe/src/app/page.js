@@ -1,5 +1,5 @@
 "use client";
-import Game from "./../components/Game";
-export default function Page() {
-  return <Game />;
-}
+import Game from "components/Game";
+
+const Page = () => <Game />;
+export default Page;
