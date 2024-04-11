@@ -1,6 +1,12 @@
 
 # Dynamic Tic Tac Toe
 
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-white?logo=tailwindcss)
+![Next.js](https://img.shields.io/badge/next.js-14.1.4-black?logo=next.js)
+![React.js](https://img.shields.io/badge/react.js-18.2.0-blue?logo=react)
+![Node.js](https://img.shields.io/badge/node.js-20.11.0-green?logo=node.js)
+![npm](https://img.shields.io/badge/npm-10.2.4-red?logo=npm)
+
 In a personal endeavor to deepen my understanding of modern web development frameworks, I set out to challenge myself: to learn and apply Next.js and Tailwind CSS in building a familiar game, Tic-Tac-Toe, all within a single day. This project not only served as a rapid learning exercise but also as a way to demonstrate the practical application of these technologies in a fun, interactive context.
 
 
@@ -12,16 +18,6 @@ In a personal endeavor to deepen my understanding of modern web development fram
 - **Reversible Moves Order:** A toggle feature to reverse the order of the move history, enhancing the analysis and review of the game strategy.
 - **Game Status Updates:** Real-time updates on the game's status, indicating whose turn it is, who won, or if the game ended in a draw, keeping players informed throughout the game.
 
-## Library and Framework 
-
-
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-
-![NodeJS](https://img.shields.io/badge/node.js-20.11.0-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-
-![npm](https://img.shields.io/badge/npm-10.2.4-blue?logo=npm)
 ## Demo
 
 
